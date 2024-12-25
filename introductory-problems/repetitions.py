@@ -1,12 +1,22 @@
 dna = input().strip()
 
-seqDict = {}
+sequenceLengthList = []
 
-for seq in dna:
-    if seq not in seqDict:
-        seqDict[f"{seq}"] = 1
+longestSeqLength = 1
+currentSeqChar = dna[0]
+for x in range(1, len(dna)):
+    if currentSeqChar == dna[x]:
+        longestSeqLength += 1
     else:
-        seqDict[f"{seq}"] += 1
-print(max(seqDict.values()))
+        if longestSeqLength not in sequenceLengthList:
+            sequenceLengthList.append(longestSeqLength)
+        currentSeqChar = dna[x]
+        longestSeqLength = 1
 
+if len(sequenceLengthList) == 0:
+    print(longestSeqLength)
+elif max(sequenceLengthList) < longestSeqLength:
+    print(longestSeqLength)
+else:
+    print(max(sequenceLengthList))
 
